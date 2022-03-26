@@ -25,7 +25,6 @@ db.connectToDB((err) => {
 	});
 
 	router.patch("/update", checkBody, async (req, res) => {
-		console.log(req.body);
 		const results = await db.updateDocument(req.body);
 		res.send(results);
 	});
