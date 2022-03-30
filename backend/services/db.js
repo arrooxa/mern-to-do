@@ -1,11 +1,12 @@
 const { MongoClient } = require("mongodb");
 
 // Connection URL
-const url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017"; // Configurar o localhost do DB no MongoDB
 const client = new MongoClient(url);
 
 // Database Name
-const dbName = "to-do-db";
+const dbName = "to-do-db"; // Alterar para o nome do Banco de Dados
+const dbCollection = "to-do-collection"; // Alterar para o nome da coleção
 
 let _db;
 
@@ -18,7 +19,7 @@ const connectToDB = (callback) => {
 };
 
 const findDocuments = async () => {
-	const collection = _db.collection("to-do-collection");
+	const collection = _db.collection(dbCollection);
 
 	try {
 		const results = await collection.find({}).toArray();
@@ -29,7 +30,7 @@ const findDocuments = async () => {
 };
 
 const insertDocuments = async (document) => {
-	const collection = _db.collection("to-do-collection");
+	const collection = _db.collection(dbCollection);
 
 	try {
 		const results = await collection.insertOne(document);
@@ -40,7 +41,7 @@ const insertDocuments = async (document) => {
 };
 
 const updateDocument = async (document) => {
-	const collection = _db.collection("to-do-collection");
+	const collection = _db.collection(dbCollection);
 
 	try {
 		const results = await collection.updateOne(
@@ -54,7 +55,7 @@ const updateDocument = async (document) => {
 };
 
 const removeDocument = async (document) => {
-	const collection = _db.collection("to-do-collection");
+	const collection = _db.collection(dbCollection);
 
 	try {
 		const results = await collection.deleteOne({ _id: document._id });
