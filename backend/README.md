@@ -4,7 +4,7 @@
 
 1- Criar um banco de Dados no MongoDB, eu utilizei o MongoDB Compass e criar a collection "to-do-db"
 
-2- Configurar as constantes no `services/db.js`
+2- Definir as constantes no `services/db.js`
 
 2- Execute
 
