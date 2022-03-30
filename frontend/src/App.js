@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Item from "./components/Item";
+import "./App.scss";
 
 function App() {
 	const [itens, setItens] = useState([]);
@@ -64,25 +65,54 @@ function App() {
 	useEffect(() => getData(), []);
 
 	return (
-		<div className="App">
-			{itensShow.map((item) => (
-				<Item
-					key={item._id}
-					item={item}
-					updateDocument={updateData}
-					deleteDocument={deleteData}
-				/>
-			))}
+		<div className="main">
+			<div className="to-do-list">
+				<h1>To-Do App</h1>
 
-			<button onClick={() => setFilterItens({ filter: false })}>Todos</button>
-			<button onClick={() => setFilterItens({ filter: true, active: true })}>
-				Pendentes
-			</button>
-			<button onClick={() => setFilterItens({ filter: true, active: false })}>
-				Concluídos
-			</button>
+				{itensShow.map((item) => (
+					<Item
+						key={item._id}
+						item={item}
+						updateDocument={updateData}
+						deleteDocument={deleteData}
+					/>
+				))}
 
-			<button onClick={insertData}>Inserir novo To-Do</button>
+				<div className="rowContainer">
+					<span
+						className={"filter"}
+						style={filterItens.filter ? {} : { fontWeight: "bold" }}
+						onClick={() => setFilterItens({ filter: false })}
+					>
+						Todos
+					</span>
+					<span
+						className={"filter"}
+						style={
+							filterItens.filter && filterItens.active === true
+								? { fontWeight: "bold" }
+								: {}
+						}
+						onClick={() => setFilterItens({ filter: true, active: true })}
+					>
+						Pendentes
+					</span>
+					<span
+						className={"filter"}
+						style={
+							filterItens.filter && filterItens.active === false
+								? { fontWeight: "bold" }
+								: {}
+						}
+						onClick={() => setFilterItens({ filter: true, active: false })}
+					>
+						Concluídos
+					</span>
+					<div className="rowContainer">
+						<button onClick={insertData}>Inserir novo To-Do</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }
